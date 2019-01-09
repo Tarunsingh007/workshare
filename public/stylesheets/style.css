@@ -1,0 +1,55 @@
+#navbar{
+	background-color:rgb(255,102,0);
+	width:100%;
+	padding:0px 0px 0px 5px;
+	margin:0px;
+	color:#000;
+}
+#posta{
+	color:#777;
+	font-size: 8pt;
+	font-family: Verdana, Geneva, sans-serif;
+}
+#navbar a{
+	color:#000;
+}
+.b{
+	right:15px;
+	position:absolute;
+	transform: translate(0,-10px);
+}
+#table{
+	font-size: 10pt;
+	border-spacing: 2px;
+	font-family: Verdana, Geneva, sans-serif;
+}
+#tablecomment{
+	margin-top:5px;
+	font-size: 10pt;
+	border-spacing: 2px;
+	font-family: Verdana, Geneva, sans-serif;
+}
+#navbar a:hover{
+	text-decoration: underline;
+}
+#usernavbar{
+	float:right;
+	list-style: none;
+	margin:2px 5px 0px 0px;
+}
+/*#post{
+	border:1px solid black;
+	overflow:hidden;
+	background-color:#f6f6ef;
+}*/
+#comment{
+	border:1px solid black;
+	overflow:hidden;
+	background-color:#f6f6ef;
+}
+#comments{
+	color:#777;
+	font-size:9pt;
+	margin-top:2px;
+	font-family: Verdana, Geneva, sans-serif;
+}

@@ -1,0 +1,39 @@
+
+<div class="container">
+{{>header}}
+{{#if post}}
+<table bgcolor="#f6f6ef" class="table-bordered table-hover" id="tablecomment">
+	<tr>
+		<td width="1110px">	{{post.title}} 
+			<a href="{{post.url}}" id="posta">({{post.url}})
+			</a>
+		<p id="posta">by {{post.name}} | 
+			<a href="/post/hide/{{post._id}}"id="posta">hide</a> | 
+			<a href="/post/comment/{{post._id}}" id="posta">comment</a>
+		</p>
+		</td>
+	</tr>
+</table>
+{{/if}}
+	<form method="post" action="/post/comment/{{postid}}">
+		Comment : <br><textarea rows="4" cols="70" name="com" required></textarea><br>
+		<input type="submit" name="submit" value="add comment" style="padding:0px height:15px;font-size: 10pt">
+	</form><br>
+{{#if comments}}
+	{{#each comments}}
+		<div class="col-lg-12" id="comment" >
+			<p>{{this.comment}}</p>
+			<blockquote class="blockquote-reverse">
+			<footer class="blockquote-footer">by {{this.noc}}</footer>
+		</blockquote>
+		</div>
+			<div class="col-lg-12">
+				<a href="/post/comment/delete/{{this._id}}" id="comments">delete </a>
+				<a href="/post/comment/update/{{this._id}}" id="comments"> update</a>
+			</div>
+		{{/each}}
+	{{else}}
+		<p>no comments</p>
+	{{/if}}
+</div>
+

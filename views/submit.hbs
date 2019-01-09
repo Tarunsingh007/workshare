@@ -1,0 +1,59 @@
+<div class="container">
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark" id="navbar">
+    <b class="navbar-brand">Submit</b>
+  	<a href="/"><b class="b">Home</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+  </nav>
+</header><br>
+<form method="post" action="/submit">
+	<div class="row">
+		<div class="col-sm-3">
+			Title :
+		</div>
+		<div class="col-sm-3">
+			<input type="text" name="ftitle">
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-sm-3">
+			Url :
+		</div>
+		<div class="col-sm-3">
+			<input type="text" name="furl">
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-sm-3">
+			
+		</div>
+		<div class="col-sm-3">
+			or
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-sm-3">
+			Text :
+		</div>
+		<div class="col-sm-3">
+			<textarea name="ftext"></textarea>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+			
+		</div>
+		<div class="col-sm-3">
+			<input type="submit">
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-sm-3">
+			
+		</div>
+		<div class="col-sm-9" id="posta">
+				Leave url blank to submit a question for discussion. If there is no url, the text (if any) will appear at the top of the thread.<br>If both Url and Text are given it will be shown in show <u>bookmarklet</u></a>.
+		</div>
+	</div>
+</form>
+</div>

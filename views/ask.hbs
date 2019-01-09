@@ -1,0 +1,16 @@
+<div class="container" id="postcontainer">
+{{>header}}
+<!-- {{#if user}}
+welcome {{user.username}}
+{{/if}}
+ -->
+{{#if ask}}
+{{#list ask}}
+	{{this.title}}
+	<p id="posta">by {{this.name}} | <a href="/post/hide/{{this._id}}"id="posta">hide</a> | 
+	<a href="/post/comment/{{this._id}}" id="posta">comment</a></p>
+{{/list}}
+{{else}}
+No Questions
+{{/if}}
+</div>
