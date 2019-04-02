@@ -8,7 +8,8 @@ var userschema=new schema({
 	},
 	password:{
 		type:String
-	}
+	},
+	upvotedPosts:[]
 });
 userschema.methods.hashPassword=function(password){
 	return bcrypt.hashSync(password,bcrypt.genSaltSync(10));

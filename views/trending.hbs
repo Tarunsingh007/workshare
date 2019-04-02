@@ -1,14 +1,19 @@
 <div class="container" id="postcontainer">
 {{>header}}
+<!-- {{#if user}}
+welcome {{user.username}}
+{{/if}}
+ -->
+ 
 {{#if posts}}
 {{#list posts}}
- 	{{this.title}}  
+ {{this.title}}  
     <a href="\/{{this.url}}" id="posta">({{this.url}})</a><br>
 	<p id="posta">by {{this.name}} | hide | 
 	<a href="/post/comment/{{this._id}}" id="posta">{{humanize this.created}}</a> | 
-	<a href="/post/comment/{{this._id}}" id="posta">{{countComments this.comments}} comments </a>| 
+	<a href="/post/comment/{{this._id}}" id="posta">{{countComments this.comments}} comments </a> | 
 	<a href="/post/comment/{{this._id}}" id="posta">{{this.upvotes}} Likes </a></p>
-	{{#if ../user}}
+    {{#if ../user}}
 	{{#if (allowLike ../user._id this.likedby)}}
 		<td><center><a href="/upvote/{{this._id}}"><div valign="top" id="arrow"></div></a></center></td>
 		{{else}}
@@ -17,10 +22,8 @@
 	{{/if}}
 {{/list}}
 {{else}}
-<p>No Posts</p>
+No posts
 {{/if}}
-
-{{#indexpaginate pg}}
-{{/indexpaginate}}
-
+{{#trendingpaginate pg}}
+{{/trendingpaginate}}
 </div>

@@ -8,9 +8,7 @@ authorization.validuser= function(req,res,next){
                 if(err){
                     res.redirect("/");
                 } else{
-                    if((data.by)==(req.user._id)){
-                      console.log(data.by);
-                      console.log(req.user._id);
+                    if(((data.by._id).toString())==(req.user._id)){
                        next();    
                     }else{
                         res.redirect("/");

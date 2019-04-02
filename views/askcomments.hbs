@@ -4,12 +4,10 @@
 {{#if post}}
 <table bgcolor="#f6f6ef" class="table-bordered table-hover" id="tablecomment">
 	<tr>
-		<td width="1110px">	{{post.title}} 
-			<a href="{{post.url}}" id="posta">({{post.url}})
-			</a>
+		<td width="1110px">	{{post.title}}
 		<p id="posta">by {{post.name}} | 
 			<a href="/post/hide/{{post._id}}"id="posta">hide</a> | 
-			<a href="/post/comment/{{post._id}}" id="posta">{{countComments this.comments}} comments</a>
+			<a href="/post/comment/{{post._id}}" id="posta">comment</a>
 		</p>
 		</td>
 	</tr>
@@ -24,18 +22,13 @@
 		<div class="col-lg-12" id="comment" >
 			<p>{{this.comment}}</p>
 			<blockquote class="blockquote-reverse">
-			<footer class="blockquote-footer"> created {{this.created}} , by {{this.by.username}} </footer>
+			<footer class="blockquote-footer">by {{this.by.username}}</footer>
 		</blockquote>
 		</div>
-			{{#if ../user}}
-			{{#if (isEqual ../user._id by._id)}}
 			<div class="col-lg-12">
 				<a href="/post/comment/delete/{{this._id}}" id="comments">delete </a>
 				<a href="/post/comment/update/{{this._id}}" id="comments"> update</a>
-				<a href="/post/comment/reply/{{this._id}}" id="comments"> reply</a>
 			</div>
-			{{/if}}
-			{{/if}}
 		{{/each}}
 	{{else}}
 		<p>no comments</p>

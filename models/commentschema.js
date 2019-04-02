@@ -1,17 +1,18 @@
 var mongoose=require('mongoose');
 var schema=mongoose.Schema;
+var userSchema=require('./userschema').schema;
 
 var commentschema=new schema({
 	comment:{
 		type:String
 	},
 	by:{
-		type:String
+		type:userSchema
 	},
 	postid:{
 		type:String
 	},
-	noc:{
+	created:{
 		type:String
 	}
 });

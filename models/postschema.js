@@ -1,5 +1,7 @@
 var mongoose=require('mongoose');
 var schema=mongoose.Schema;
+var commentSchema=require('./commentschema').schema;
+var userSchema=require('./userschema').schema;
 
 var blogschema=new schema({
 	title:{
@@ -16,11 +18,17 @@ var blogschema=new schema({
 		default:Date.now
 	},
 	by:{
-		type:String
+		type:userSchema
 	},
 	name:{
 		type:String
-	}
+	},
+	likedby:[],
+	upvotes:Number,
+	section:{
+		type:String
+	},
+	comments:[commentSchema]
 });
 
 

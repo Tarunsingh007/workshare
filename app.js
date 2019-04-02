@@ -8,28 +8,73 @@ const passport=require('passport');
 const cookieSession=require('cookie-session');
 const mongoose=require('mongoose');
 const hbs=require('hbs');
+const Humanize=require('./config/date').Humanize;
+
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var authRouter=require('./routes/auth');
+var askRouter=require('./routes/ask');
+var showRouter=require('./routes/show');
 var app = express();
-// hbs.registerHelper('list', function(items, options) {
-//   var out=" ";
-//   for(var i=1, l=items.length; i<=l; i++) {
-//     out = out+'<div class="row">'+'<div class="col-sm-1" id="post1">'+ i +"</div>"+'<div class="col-sm-11" id="post">'+options.fn(items[i])+'</div>'+'</div>';
-//   }
 
-//   return out ;
-// });
 hbs.registerHelper('list', function(items, options) {
-  var out='<table bgcolor="#f6f6ef" class="table-bordered table-hover" id="table">';
+  var out='<div class="table-responsive"><table class="table table-hover table-condensed" bgcolor="#f6f6ef">';
   var s=0;
-  for(var i=0, l=items.length; i<l; i++) {
-    out = out+'<tr>'+'<td width="50px">'+ ++s +"." +'</td>'+'<td width="1100px">'+options.fn(items[i])+'</td>'+'</tr>';
+  for(var i=0; i<items.length; i++) {
+    out = out+'<tr style="height:0px; padding:0px; margin:0px;" >'+'<td id="votelink" align="right" valign="top">'+ ++s +"." +'</td>'+'<td width="1100px">'+options.fn(items[i])+'</td>'+'</tr>';
   }
-
-  return out +'</table>';
+  return out +'</table></div>';
 });
+hbs.registerHelper('humanize', function(date) {
+  var hum = new Humanize(date);
+  return hum.humanizeDate();
+});
+hbs.registerHelper('isEqual', function(obj1, obj2) {
+  return obj1.equals(obj2);
+});
+hbs.registerHelper('indexpaginate', function(o){
+  var out='';
+  for(let i=1; i<=o; i++)
+  {
+    out=out+'<button id="posta" style="font-size:10pt;">'+`<a href="/?pg=${i}">`+i+'</a></button>';
+  }return out;
+});
+hbs.registerHelper('showpaginate', function(o){
+  var out='';
+  for(let i=1; i<=o; i++)
+  {
+    out=out+'<button id="posta" style="font-size:10pt;">'+`<a href="/show/?pg=${i}">`+i+'</a></button>';
+  }return out;
+});
+hbs.registerHelper('askpaginate', function(o){
+  var out='';
+  for(let i=1; i<=o; i++)
+  {
+    out=out+'<button id="posta" style="font-size:10pt;">'+`<a href="/ask/?pg=${i}">`+i+'</a></button>';
+  }return out;
+});
+hbs.registerHelper('trendingpaginate', function(o){
+  var out='';
+  for(let i=1; i<=o; i++)
+  {
+    out=out+'<button id="posta" style="font-size:10pt;">'+`<a href="/trending/?pg=${i}">`+i+'</a></button>';
+  }return out;
+});
+
+hbs.registerHelper('allowLike', function(obj1, obj2) {
+  for(var i=0; i<obj2.length; i++)
+  {
+    var l=obj1.toString();
+    var r=obj2[i].toString();
+    if(l==r)
+    return true;
+  }
+});
+
+hbs.registerHelper('countComments', function(com) {
+  return com.length;
+})
+
 //mongoose setup
 mongoose.connect("mongodb://localhost/hackernews",(err)=>{
 	if(err)
@@ -44,7 +89,7 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 //cookie
 app.use(cookieSession({
-  valid:50000,
+  valid:1000,
   keys:['asdsd']
 }));
 
@@ -60,8 +105,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/show', showRouter);
+app.use('/ask', askRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -80,3 +126,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+// +'<td><center><a><div valign="top" id="votearrow"></div></a></center></td>'
