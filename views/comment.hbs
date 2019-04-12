@@ -24,8 +24,8 @@
 		<div class="col-lg-12" id="comment" >
 			<p>{{this.comment}}</p>
 			<blockquote class="blockquote-reverse">
-			<footer class="blockquote-footer"> created {{this.created}} , by {{this.by.username}} </footer>
-		</blockquote>
+				<footer class="blockquote-footer"> created {{this.created}} , by {{this.by.username}} </footer>
+			</blockquote>
 		</div>
 			{{#if ../user}}
 			{{#if (isEqual ../user._id by._id)}}

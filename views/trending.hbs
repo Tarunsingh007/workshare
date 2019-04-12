@@ -6,7 +6,7 @@ welcome {{user.username}}
  -->
  
 {{#if posts}}
-{{#list posts}}
+{{#list posts s}}
  {{this.title}}  
     <a href="\/{{this.url}}" id="posta">({{this.url}})</a><br>
 	<p id="posta">by {{this.name}} | hide | 
@@ -15,9 +15,9 @@ welcome {{user.username}}
 	<a href="/post/comment/{{this._id}}" id="posta">{{this.upvotes}} Likes </a></p>
     {{#if ../user}}
 	{{#if (allowLike ../user._id this.likedby)}}
-		<td><center><a href="/upvote/{{this._id}}"><div valign="top" id="arrow"></div></a></center></td>
+		<td><center><a href="/trending/upvote/{{this._id}}"><div valign="top" id="arrow"></div></a></center></td>
 		{{else}}
-		<td><center><a href="/upvote/{{this._id}}"><div valign="top" id="votearrow"></div></a></center></td>
+		<td><center><a href="/trending/upvote/{{this._id}}"><div valign="top" id="votearrow"></div></a></center></td>
 	{{/if}}
 	{{/if}}
 {{/list}}

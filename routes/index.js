@@ -8,25 +8,33 @@ const Post=require('../models/postschema.js');
 const Comment=require('../models/commentschema.js');
 const _=require('lodash');
 var sz=10;
+
 router.get('/',(req,res)=>{
 	var pg=parseInt(req.query.pg);
+	if(isNaN(pg))
+	pg=1;
+	var sk=Number(sz*(pg-1));
 	var query={};
 	query.skip=sz*(pg-1);
 	query.limit=sz;
+	console.log(typeof(pg));
+	console.log(pg);
 	Post.count({section:"post"},function(err,c){
 		var totalpages=Math.ceil(parseFloat(c/sz));	
 		Post.find({section:"post"},{},query).then((post)=>{
 			if(!post)
 			console.log("no posts");
-				res.render('index',{user:req.user,posts:post,pg:totalpages});
+				res.render('index',{user:req.user,posts:post,pg:totalpages,s:sk});
 		});
 	});
-
 });
 
 //trending posts route
 router.get('/trending',(req,res)=>{
 	var pg=parseInt(req.query.pg);
+	if(isNaN(pg))
+	pg=1;
+	var sk=Number(sz*(pg-1));
 	var query={};
 	var size=sz*(pg-1);
 	query.skip=size;
@@ -36,7 +44,7 @@ router.get('/trending',(req,res)=>{
 	Post.find({},{},query).sort({upvotes:-1}).then((post)=>{
 		if(!post)
 			console.log("no posts");
-			res.render('trending',{user:req.user,posts:post,pg:totalpages,size:size});
+			res.render('trending',{user:req.user,posts:post,pg:totalpages,size:size,s:sk});
 	});
 });
 });
@@ -45,16 +53,6 @@ router.get('/trending',(req,res)=>{
 router.get('/post/hide/:id',middleware.isLoggedIn,(req,res)=>{
 	let id=req.params.id;
 });
-
-//new post route
-// router.get('/new',(req,res)=>{
-// 	Post.find().sort({created:-1}).then((post)=>{
-// 		if(!post)
-// 			console.log("no posts");
-// 			res.render('new',{user:req.user,posts:post});
-// 	});
-// });
-
 //comment routes----------------
 router.get('/post/comment/delete/:id',middleware.validuser,(req,res)=>{
 	let id=req.params.id;
@@ -167,10 +165,17 @@ router.get('/upvote/:id',middleware.isLoggedIn,(req,res)=>{
 });
 
 //post routes-------------------
-router.get('/user/:username',middleware.isLoggedIn,(req,res)=>{
-	username=req.user.username;
-	res.render('username',{user:req.user});
-})
+router.get('/user/:username',(req,res)=>{
+		let username=req.params.username;
+		User.findOne({username:username}).then((users)=>{
+				Post.find({'by.username':username})
+				.then((post)=>{
+					// console.log(JSON.stringify(users).username+"ssdaaas");
+					res.render('username',{user:users,posts:post});
+			});
+		});
+});
+
 router.get('/submit',middleware.isLoggedIn,(req,res)=>{
 	res.render('submit',{user:req.user});
 });

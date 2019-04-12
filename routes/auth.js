@@ -21,10 +21,11 @@ router.post('/signup',(req,res,next)=>{
 		{
 			let username=req.body.usersignup;
 			let password=req.body.passsignup;
-
+			let date=new Date().toString().substring(1,15);
 			var newuser=new User();
 			newuser.password=newuser.hashPassword(password);
 			newuser.username=username;
+			newuser.created=date;
 			newuser.save((err,data)=>{
 				if(err)
 					console.log(err);

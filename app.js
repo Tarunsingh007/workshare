@@ -17,21 +17,24 @@ var askRouter=require('./routes/ask');
 var showRouter=require('./routes/show');
 var app = express();
 
-hbs.registerHelper('list', function(items, options) {
+hbs.registerHelper('list', function(items, o, options) {
   var out='<div class="table-responsive"><table class="table table-hover table-condensed" bgcolor="#f6f6ef">';
-  var s=0;
+  s=o;
   for(var i=0; i<items.length; i++) {
     out = out+'<tr style="height:0px; padding:0px; margin:0px;" >'+'<td id="votelink" align="right" valign="top">'+ ++s +"." +'</td>'+'<td width="1100px">'+options.fn(items[i])+'</td>'+'</tr>';
   }
   return out +'</table></div>';
 });
+
 hbs.registerHelper('humanize', function(date) {
   var hum = new Humanize(date);
   return hum.humanizeDate();
 });
+
 hbs.registerHelper('isEqual', function(obj1, obj2) {
   return obj1.equals(obj2);
 });
+
 hbs.registerHelper('indexpaginate', function(o){
   var out='';
   for(let i=1; i<=o; i++)
@@ -39,6 +42,7 @@ hbs.registerHelper('indexpaginate', function(o){
     out=out+'<button id="posta" style="font-size:10pt;">'+`<a href="/?pg=${i}">`+i+'</a></button>';
   }return out;
 });
+
 hbs.registerHelper('showpaginate', function(o){
   var out='';
   for(let i=1; i<=o; i++)
@@ -46,6 +50,7 @@ hbs.registerHelper('showpaginate', function(o){
     out=out+'<button id="posta" style="font-size:10pt;">'+`<a href="/show/?pg=${i}">`+i+'</a></button>';
   }return out;
 });
+
 hbs.registerHelper('askpaginate', function(o){
   var out='';
   for(let i=1; i<=o; i++)
@@ -53,6 +58,7 @@ hbs.registerHelper('askpaginate', function(o){
     out=out+'<button id="posta" style="font-size:10pt;">'+`<a href="/ask/?pg=${i}">`+i+'</a></button>';
   }return out;
 });
+
 hbs.registerHelper('trendingpaginate', function(o){
   var out='';
   for(let i=1; i<=o; i++)

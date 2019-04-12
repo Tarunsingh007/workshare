@@ -5,7 +5,7 @@ welcome {{user.username}}
 {{/if}}s
  -->
 {{#if ask}}
-{{#list ask}}
+{{#list ask s}}
 	Ask HN: {{this.title}}</br>
 	<p id="posta">by {{this.name}} | <a href="/ask/hide/{{this._id}}"id="posta">hide</a> |
 	<a href="/post/comment/{{this._id}}" id="posta">{{humanize this.created}}</a> | 
@@ -13,9 +13,9 @@ welcome {{user.username}}
 	<a href="/post/comment/{{this._id}}" id="posta">{{this.upvotes}} Likes</a></p>
 	{{#if ../user}}
 	{{#if (allowLike ../user._id this.likedby)}}
-		<td><center><a href="/upvote/{{this._id}}"><div valign="top" id="arrow"></div></a></center></td>
+		<td><center><a href="/ask/upvote/{{this._id}}"><div valign="top" id="arrow"></div></a></center></td>
 		{{else}}
-		<td><center><a href="/upvote/{{this._id}}"><div valign="top" id="votearrow"></div></a></center></td>
+		<td><center><a href="/ask/upvote/{{this._id}}"><div valign="top" id="votearrow"></div></a></center></td>
 		{{!-- <form action="/upvote/{{this._id}}" method="post"> --}}
 		{{!-- <input type="submit" name="like" value="like" id="like" > --}}
 		{{!-- </form> --}}

@@ -4,15 +4,43 @@
 		<p>Please put a valid address in the email field, or we won't be able to send you a new password if you forget yours. Your address is only visible to you and us. Crawlers and other users can't see it.</p>
 	</div>
 	<div class="row">
-		<div class="col-sm-3">
-			user: <br>
-			created: <br>
-			about: <br>
+		<div class="col-sm-6">
+			UserName:
 		</div>
-		<div class="col-sm-3">
-			{{user.username}}<br>
-			created<br>
-			<textarea height=80px></textarea>
+		<div class="col-sm-6">
+			{{user.username}}
 		</div>
-	</div>
+	</div><br>
+	<div class="row">
+		<div class="col-sm-6">
+			Created:
+		</div>
+		<div class="col-sm-6">
+			{{humanize user.created}}
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-sm-6">
+			Karma:
+		</div>
+		<div class="col-sm-6">
+			1
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-sm-6">
+			Posts:
+		</div>
+		<div class="col-sm-6">
+			{{posts.length}}
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-sm-6">
+			Liked Posts:
+		</div>
+		<div class="col-sm-6">
+			{{user.upvotedPosts.length}}
+		</div>
+	</div><br>
 </div>
